@@ -1,0 +1,10 @@
+# Plugins are cloned on first shell start by plugins.zsh
+plugins/
+
+# Shell state (history lives in $XDG_STATE_HOME/zsh/history)
+.zsh_history
+.zsh_sessions/
+.zcompdump*
+*.zwc
+
+.DS_Store

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Block commits that contain secrets (API keys, tokens, private keys, ...).
+# Enable with: git config core.hooksPath .githooks
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: gitleaks is not installed (brew install gitleaks); refusing to commit." >&2
+  echo "pre-commit: bypass with 'git commit --no-verify' only if you are sure." >&2
+  exit 1
+fi
+
+# Scan only the staged changes; --redact keeps secrets out of the terminal output
+exec gitleaks git --pre-commit --staged --redact --no-banner --verbose
